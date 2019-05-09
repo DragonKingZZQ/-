@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzq.mybatis.ProvinceMapper">
+	<resultMap type="com.zzq.entity.Province" id="ResultMap">
+		<id column = "province_id" property="province_id" jdbcType="INTEGER"/>
+		<result column = "province_name" property="province_name" jdbcType="VARCHAR" />
+		
+	</resultMap>
+	
+	
+	
+	
+	
+</mapper>

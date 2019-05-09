@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+    <properties resource="jdbc.properties">
+       <property name="username" value="admin"/>
+       <property name="password" value="026813"/>
+       <property name="url" value="jdbc\:mysql\://47.95.197.181\:3306/shixun?useUnicode\=true&characterEncoding\=utf-8&useSSL\=false&serverTimezone\=GMT%2B8"/>
+       <!-- 注意在xml中url的参数分割符需要使用&代替&,amp$还要以;分割，这是跟JDBC不一样的地方 -->
+    </properties>
+   
+    <typeAliases>
+        <typeAlias alias="Product" type="com.zzq.entity.Product" />
+    </typeAliases>
+ 
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+ 
+    <mappers>
+        <mapper resource="com/zzq/mapper/ProductMapper.xml" />
+    </mappers>
+</configuration>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzq.mybatis.ProductMapper">
+	<resultMap type="com.zzq.entity.Product" id="ResultMap">
+		<id column = "id" property="id" jdbcType="INTEGER"/>		
+		<result column = "cast_openid" property="cast_openid" jdbcType="VARCHAR" />
+		<result column = "title" property="title" jdbcType="VARCHAR" />
+		<result column = "type_id" property="type_id" jdbcType="INTEGER" />
+		<result column = "type_name" property="type_name" jdbcType="VARCHAR" />
+		<result column = "content" property="content" jdbcType="VARCHAR" />			
+		<result column = "casttime" property="casttime" jdbcType="DATE" />
+		<result column = "receivetime" property="receivetime" jdbcType="DATE" />
+		<result column = "receive_openid" property="receive_openid" jdbcType="VARCHAR" />
+		<result column = "status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<select id="selectAllPro" resultMap="ResultMap">
+		select * from product where status = 1
+	</select>
+	
+	<select id="selectProById" resultMap="ResultMap">
+		select * from product where id = #{id}
+	</select>
+	
+	<select id="selectByTypeid" resultMap="ResultMap">
+		select * from product where type_id = #{type_id} and status = 1		
+	</select>
+	
+	<select id="selectByCastOpenid" resultMap="ResultMap">
+		select * from product where cast_openid = #{cast_openid}
+	</select>
+	
+	<select id="selectByReceiveOpenid" resultMap="ResultMap">
+		select * from product where receive_openid = #{receive_openid}
+	</select>
+	
+	<select id="searchTitle" resultMap="ResultMap">
+		select * from product where title like concat('%',#{title},'%')
+	</select>
+	
+	<insert id="insertPro">
+		insert into product(cast_openid,title,type_id,type_name,content,casttime)
+		values(#{pro.cast_openid},#{pro.title},#{pro.type_id},#{pro.type_name},#{pro.content},NOW())
+	</insert>
+	
+	<update id="insertRelease">
+		update product set receive_openid = #{pro.receive_openid},receivetime = NOW(),status = 0 where id = #{pro.id}
+	</update>
+</mapper>
